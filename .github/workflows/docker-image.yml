@@ -37,6 +37,6 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/jiechau/ppp:latest
-            ghcr.io/jiechau/ppp:3.9.6
-            ghcr.io/jiechau/ppp:3.9
+            ghcr.io/jiechau/python:latest
+            ghcr.io/jiechau/python:3.9.6
+            ghcr.io/jiechau/python:3.9
