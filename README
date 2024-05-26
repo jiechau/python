@@ -2,7 +2,7 @@
 
 #!/bin/bash
 
-#
+# 
 
 cd /app
 python3 -W ignore conn_oracle.py
