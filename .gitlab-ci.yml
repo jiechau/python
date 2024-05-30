@@ -1,0 +1,52 @@
+stages:
+  - build_gitlab
+  - build_dockerhub
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  IMAGE_NAME: python # Replace with your image name
+  IMAGE_TAG: latest # Replace with your desired tag or use $CI_COMMIT_REF_SLUG for dynamic tagging
+
+services:
+  - docker:dind
+
+before_script:
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+do_gitlab:
+  image: docker:latest
+  stage: build_gitlab
+  script:
+    - echo $CI_REGISTRY
+    - echo $IMAGE_NAME
+    - echo $CI_REGISTRY_IMAGE
+    - echo 'jie'
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    #- docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker buildx create --use --name mybuilder_amd64
+    - docker buildx build --platform linux/amd64 --build-arg ARCH=amd64 -t $CI_REGISTRY_IMAGE:amd64 --push .
+    - docker buildx create --use --name mybuilder_arm64
+    - docker buildx build --platform linux/arm64 --build-arg ARCH=arm64 -t $CI_REGISTRY_IMAGE:arm64 --push .
+    - docker buildx create --use --name mybuilder_final
+    #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker buildx imagetools create -t $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:amd64 $CI_REGISTRY_IMAGE:arm64
+    - docker buildx imagetools create -t $CI_REGISTRY_IMAGE:3.9 $CI_REGISTRY_IMAGE:amd64 $CI_REGISTRY_IMAGE:arm64
+  only:
+    - main
+
+do_dockerhub:
+  image: docker:latest
+  stage: build_dockerhub
+  script:
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+
+    - docker buildx create --use --name mybuilder_h_amd64
+    - docker buildx build --platform linux/amd64 --build-arg ARCH=amd64 -t jiechau/python:amd64 --push .
+    - docker buildx create --use --name mybuilder_h_arm64
+    - docker buildx build --platform linux/arm64 --build-arg ARCH=arm64 -t jiechau/python:arm64 --push .
+    - docker buildx create --use --name mybuilder_h_final
+    - docker buildx imagetools create -t jiechau/python:latest jiechau/python:amd64 jiechau/python:arm64
+    - docker buildx imagetools create -t jiechau/python:3.9 jiechau/python:amd64 jiechau/python:arm64
+  only:
+    - main

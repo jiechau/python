@@ -28,11 +28,18 @@ set mouse-=a       \n"\
 
 
 WORKDIR /app
+
+#COPY . /app
+COPY ./pod_python.yaml /app
+COPY ./*.py /app
+COPY config/ /app/config/
+#COPY oracle_tools/ /app/oracle_tools/
+ARG ARCH
+COPY oracle_tools_${ARCH}/ /app/oracle_tools/
+
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-COPY . /app
-#COPY oracle_tools/ /app/oracle_tools/
 
 ENV ORACLE_HOME=/app/oracle_tools/instantclient
 ENV TNS_ADMIN=/app/oracle_tools/instantclient
