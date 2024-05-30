@@ -3,3 +3,12 @@ oracle_tools/instantclient/libclntsh.so.21.1 filter=lfs diff=lfs merge=lfs -text
 oracle_tools/instantclient/libclntshcore.so.21.1 filter=lfs diff=lfs merge=lfs -text
 oracle_tools/instantclient/libnnz21.so filter=lfs diff=lfs merge=lfs -text
 oracle_tools/instantclient/ojdbc8.jar filter=lfs diff=lfs merge=lfs -text
+oracle_tools_amd64/instantclient/libociei.so filter=lfs diff=lfs merge=lfs -text
+oracle_tools_amd64/instantclient/libclntsh.so.21.1 filter=lfs diff=lfs merge=lfs -text
+oracle_tools_amd64/instantclient/libclntshcore.so.21.1 filter=lfs diff=lfs merge=lfs -text
+oracle_tools_amd64/instantclient/libnnz21.so filter=lfs diff=lfs merge=lfs -text
+oracle_tools_amd64/instantclient/ojdbc8.jar filter=lfs diff=lfs merge=lfs -text
+oracle_tools_arm64/instantclient/ojdbc8.jar filter=lfs diff=lfs merge=lfs -text
+oracle_tools_arm64/instantclient/libnnz19.so filter=lfs diff=lfs merge=lfs -text
+oracle_tools_arm64/instantclient/libclntsh.so.19.1 filter=lfs diff=lfs merge=lfs -text
+oracle_tools_arm64/instantclient/libociei.so filter=lfs diff=lfs merge=lfs -text
