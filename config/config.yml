@@ -1,11 +1,19 @@
 Database_connection:
+  oracle_ecuat2: 'ttttt/11111@1.1.1.1/DB'
   oracle_bo: 'ttttt/11111@1.1.1.1/DB'
   postgresql: 'host=1.1.1.1 dbname=db user=ttttt password=11111 port=5432 connect_timeout=5'
 elasticsearch:
-  url: "http://1.1.1.1:9200"
-  api_key: "11111"
+  url_dev: "http://1.1.1.1:9200"
+  api_key_dev: "11111"
 Redis:
   port: 6379
   host: "1.1.1.1"
   password: "11111"
-
+RabbitMQ:
+  ip_address: '1.1.1.1'
+  port_number: 5672
+  username: 'ttttt'
+  password: '11111'
+KafkaCDC:
+  bootstrap_servers: '1.1.1.1:9092,1.1.1.2:9092,1.1.1.3:9092'
+  schema_registry_url: 'http://1.1.1.4:8081/'
