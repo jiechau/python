@@ -35,6 +35,7 @@ COPY ./*.py /app
 COPY config/ /app/config/
 #COPY oracle_tools/ /app/oracle_tools/
 ARG ARCH
+RUN echo ${ARCH} > /app/os-arch
 COPY oracle_tools_${ARCH}/ /app/oracle_tools/
 
 COPY ./requirements.txt /app/requirements.txt
