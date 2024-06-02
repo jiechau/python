@@ -17,8 +17,8 @@ before_script:
 do_gitlab:
   rules:
     - if: $CI_COMMIT_TAG
-#  only:
-#    - main
+  only:
+    - main
   image: docker:latest
   stage: build_gitlab
   script:
@@ -39,10 +39,10 @@ do_gitlab:
 
 
 do_dockerhub:
-  rules:
-    - if: $CI_COMMIT_TAG
-#  only:
-#    - main
+#  rules:
+#    - if: $CI_COMMIT_TAG
+  only:
+    - main
   image: docker:latest
   stage: build_dockerhub
   script:
