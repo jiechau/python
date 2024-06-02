@@ -6,6 +6,7 @@
 import time
 import random
 import paho.mqtt.client as mqtt
+import yaml
 
 #%% myconfig
 def get_myconfig(_myconfig_file):

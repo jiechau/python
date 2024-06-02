@@ -11,6 +11,7 @@ import pika
 import json
 import time
 import random
+import yaml
 
 
 #%% myconfig
@@ -23,8 +24,8 @@ def get_myconfig(_myconfig_file):
 # consumer
 def callback(ch, method, properties, body):
     data = json.loads(body)
-    #print(f"Received number: {data['age']}. name: {data['first name']}. addr: {data['addr']}.")
-    print(data)
+    #print(f"Received number: {data['int']}. name: {data['first name']}. addr: {data['addr']}.")
+    print('got: ' + str(data))
     #time.sleep(1)
 
 #%% main
@@ -46,15 +47,17 @@ if __name__ == '__main__':
     try:
         connection = pika.BlockingConnection(connection_parameters)
         channel = connection.channel()
-        channel.queue_declare(queue='/topic/test/test0') # 這個名字可以自己取
-        data = {'age': 30, 'first name': 'jie', 'addr': 'taipei'}
+        channel.queue_declare(queue='/test/jie') # 這個名字可以自己取
+        random_number = random.randint(1000, 9999)
+        data = {'int': random_number, 'first name': 'jie', 'addr': 'taipei'}
         #json_bytes = json.dumps(data).encode('utf-8') 
         json_bytes = json.dumps(data)
         channel.basic_publish(exchange='',
-                          routing_key='/topic/test/test0',
+                          routing_key='/test/jie',
                           body=json_bytes)
         channel.close()
         connection.close()
+        print('send: ' + str(data))
     except pika.exceptions.AMQPConnectionError as e:
         print('ttt')
         channel.close()
@@ -73,8 +76,8 @@ if __name__ == '__main__':
       connection = pika.BlockingConnection(connection_parameters)
       channel = connection.channel()
       # 確認隊列存在
-      channel.queue_declare(queue='/topic/test/test0') # topic 自己取
-      channel.basic_consume(queue='/topic/test/test0', on_message_callback=callback, auto_ack=True)
+      channel.queue_declare(queue='/test/jie') # topic 自己取
+      channel.basic_consume(queue='/test/jie', on_message_callback=callback, auto_ack=True)
       print(' [*] Waiting for messages. To exit press CTRL+C')
       channel.start_consuming()
     except pika.exceptions.AMQPConnectionError as e:
