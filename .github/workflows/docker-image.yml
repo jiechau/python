@@ -3,7 +3,7 @@ name: Build and Push Docker Images
 on:
   push:
     tags:
-      - push_github
+      - '*push_github*'
 
 #on:
 #  push:

@@ -15,6 +15,10 @@ before_script:
   - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
 do_gitlab:
+  rules:
+    - if: $CI_COMMIT_TAG
+#  only:
+#    - main
   image: docker:latest
   stage: build_gitlab
   script:
@@ -32,16 +36,13 @@ do_gitlab:
     #- echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker buildx imagetools create -t $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:amd64 $CI_REGISTRY_IMAGE:arm64
     - docker buildx imagetools create -t $CI_REGISTRY_IMAGE:3.9 $CI_REGISTRY_IMAGE:amd64 $CI_REGISTRY_IMAGE:arm64
-  only:
-    refs:
-      - tags
-    variables:
-      - $CI_COMMIT_TAG == "push"
-#  only:
-#    - main
 
 
 do_dockerhub:
+  rules:
+    - if: $CI_COMMIT_TAG
+#  only:
+#    - main
   image: docker:latest
   stage: build_dockerhub
   script:
@@ -54,11 +55,4 @@ do_dockerhub:
     - docker buildx create --use --name mybuilder_h_final
     - docker buildx imagetools create -t jiechau/python:latest jiechau/python:amd64 jiechau/python:arm64
     - docker buildx imagetools create -t jiechau/python:3.9 jiechau/python:amd64 jiechau/python:arm64
-  only:
-    refs:
-      - tags
-    variables:
-      - $CI_COMMIT_TAG == "push"
-#  only:
-#    - main
 
