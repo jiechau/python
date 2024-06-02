@@ -1,3 +1,6 @@
+# docker run -it --rm -v /home/rundeck/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml registry.gitlab.com/jiechau/python
+# p conn_kafkacdc.py
+
 import pandas as pd
 import cx_Oracle
 import yaml
@@ -32,6 +35,9 @@ if __name__ == '__main__':
     print(df.head(5))
     # close it
     get_close_oracle(conn_boseg, cur_boseg)
+
+    # docker run -it --rm -v /home/rundeck/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml registry.gitlab.com/jiechau/python
+    # p conn_kafkacdc.py
 
 
 

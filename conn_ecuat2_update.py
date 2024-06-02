@@ -1,3 +1,6 @@
+# docker run -it --rm -v $HOME/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml jiechau/python
+# while true; do echo $(date +'%Y/%m/%d %H:%M:%S') $(p conn_ecuat2_update.py); sleep 30; done
+
 import pandas as pd
 import cx_Oracle
 import yaml
@@ -45,5 +48,6 @@ if __name__ == '__main__':
     # close it
     get_close_oracle(conn_boseg, cur_boseg)
 
-
+    # docker run -it --rm -v $HOME/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml jiechau/python
+    # while true; do echo $(date +'%Y/%m/%d %H:%M:%S') $(p conn_ecuat2_update.py); sleep 30; done
 
