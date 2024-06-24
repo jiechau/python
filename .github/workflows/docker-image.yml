@@ -2,14 +2,9 @@ name: Build and Push Docker Images
 
 on:
   push:
-    tags:
-      - '*push_github*'
-
-#on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 env:
   IMAGE_NAME: ghcr.io/jiechau/python
