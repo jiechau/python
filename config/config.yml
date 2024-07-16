@@ -2,6 +2,7 @@ Database_connection:
   oracle_ecuat2: 'ttttt/11111@1.1.1.1/DB'
   oracle_bo: 'ttttt/11111@1.1.1.1/DB'
   postgresql: 'host=1.1.1.1 dbname=db user=ttttt password=11111 port=5432 connect_timeout=5'
+  #postgresql: 'postgresql+psycopg2://ttttt:11111@1.1.1.1:5432/db'
 elasticsearch:
   url_dev: "http://1.1.1.1:9200"
   api_key_dev: "11111"
