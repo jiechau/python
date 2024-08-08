@@ -15,11 +15,12 @@ if __name__ == "__main__":
     postgresql = myconfig['Database_connection']['postgresql']
     conn = psycopg2.connect(postgresql)
     #sql = "select * from logschema.b_control"
-    sql = "select * from ec_apuser.cdc_test WHERE a_str='jie-cdc-test'"
+    #sql = "select * from ec_apuser.cdc_test WHERE a_str='jie-cdc-test'"
+    sql = "select modified_at from ec_apuser.product_info order by modified_at desc limit 5"
     try:
         df = pd.read_sql(sql, conn)
-        #print(df)
-        print(df.loc[0, 'a_v_str'])
+        print(df)
+        #print(df.loc[0, 'a_v_str'])
     except Exception as e:
         print(e)
     finally:

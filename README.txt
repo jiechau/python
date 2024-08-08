@@ -55,3 +55,11 @@ spec:
 export ORACLE_HOME=/app/oracle_tools/instantclient
 export TNS_ADMIN=/app/oracle_tools/instantclient
 export LD_LIBRARY_PATH=/app/oracle_tools/instantclient:$LD_LIBRARY_PATH
+
+
+# misc
+
+# use host network
+docker run --network host -it -v $HOME/ai_codes/fastapi-vm/service/config:/app/config jiechau/python
+# cdc test
+while true; do echo $(date +'%Y/%m/%d %H:%M:%S') $(p -W ignore conn_postgresql.py); echo $(date +'%Y/%m/%d %H:%M:%S') $(p -W ignore conn_ecuat2_update.py); sleep 60; done

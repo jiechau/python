@@ -41,13 +41,12 @@ if __name__ == '__main__':
         conn_boseg.commit()
     # random update
     random_number = random.randint(1000, 9999)
-    print(str(random_number))
-    update_query = "UPDATE ec_apuser.cdc_test SET id = " + str(random_number) + " WHERE a_str = 'jie-cdc-test'"
-    cur_boseg.execute(update_query)
+    print(str(random_number), 'ecuat2 set')
+    update_query = "UPDATE ec_apuser.cdc_test SET a_v_str = '" + str(random_number) + "' WHERE a_str = 'jie-cdc-test'"    cur_boseg.execute(update_query)
     conn_boseg.commit()
     # close it
     get_close_oracle(conn_boseg, cur_boseg)
 
-    # docker run -it --rm -v $HOME/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml jiechau/python
-    # while true; do echo $(date +'%Y/%m/%d %H:%M:%S') $(p conn_ecuat2_update.py); sleep 30; done
-
+    # docker run --network host -it --rm -v $HOME/ai_codes/fastapi-vm/service/config/config.yml:/app/config/config.yml jiechau/python
+    # while true; do echo $(date +'%Y/%m/%d %H:%M:%S') $(p -W ignore conn_postgresql.py); echo $(date +'%Y/%m/%d %H:%M:%S') $(p -W ignore conn_ecuat2_update.py); sleep 60; done
+    
