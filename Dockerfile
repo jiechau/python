@@ -32,6 +32,8 @@ WORKDIR /app
 #COPY . /app
 COPY ./pod_python.yaml /app
 COPY ./*.py /app
+COPY ./*.sh /app
+COPY ./*.json /app
 COPY config/ /app/config/
 #COPY oracle_tools/ /app/oracle_tools/
 ARG ARCH
