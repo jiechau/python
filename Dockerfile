@@ -5,7 +5,7 @@ RUN date
 
 
 RUN apt-get update -y &&  apt-get install libaio1 -y
-RUN apt-get install -y htop nload telnet vim procps netcat wget curl net-tools dnsutils iputils-ping git apache2-utils
+RUN apt-get install -y htop nload telnet vim procps netcat wget curl net-tools dnsutils iputils-ping git apache2-utils bc
 
 RUN mkdir -p /root
 RUN echo "# alias    \n\
